@@ -1,0 +1,46 @@
+
+#include <stdio.h>
+int swap(int *a,int *b)
+{
+    int t;
+    t=*a;
+    *a=*b;
+    *b=t;
+    return 0;
+}
+int partition(int a[],int s,int e)
+{
+      int pivot=a[e];
+    int i=s-1;
+    for(int j=s;j<=e-1;j++)
+    {
+        if(a[j]<a[pivot])
+        {
+            i++;
+            swap(&a[j],&a[i]);
+        }
+    }
+    swap(&a[pivot],&a[i+1]);
+    return i+1;
+}
+int quicksort(int arr[],int s,int e)
+{
+  if(s<e){
+    int p=partition(arr,s,e);
+    quicksort(arr,s,p-1);
+    quicksort(arr,p+1,e);
+  }
+  return 0;
+}
+int main() {
+    // Write C code here
+   int arr[]={2,3,7,5,9,8,10,4};
+   int n=sizeof(arr)/sizeof(int);
+   int s=0,e=n-1;
+   quicksort(arr,s,e);
+   for(int i=0;i<n;i++)
+   {
+       printf("%d",arr[i]);
+   }
+    return 0;
+}
